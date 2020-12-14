@@ -22,6 +22,12 @@ HRESULT __stdcall Base::Hooks::EndScene(LPDIRECT3DDEVICE9 pDevice)
 
 	Base::Hack();
 
+	/*
+	Draw::Line({ 10, 10 }, { 20, 10 }, 2, D3DCOLOR_RGBA(255, 0, 0, 255), pDevice);
+	Draw::Rectangle(10, 20, 50, 50, 4, D3DCOLOR_RGBA(125, 125, 0, 255), pDevice);
+	Draw::FilledRectangle(10, 30, 50, 50, D3DCOLOR_RGBA(0, 255, 0, 255), pDevice);
+	*/
+
 	ImGui_ImplDX9_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();

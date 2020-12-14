@@ -10,6 +10,8 @@
 #include <imgui/imgui.h>
 #include <imgui/imgui_impl_win32.h>
 #include <imgui/imgui_impl_dx9.h>
+#include <base_types.h>
 #include <sdk/sdk.h>
+#include <draw/draw.h>
 
 #endif

@@ -5,56 +5,7 @@
 #include <iostream>
 #include <cstdint>
 #include <libmem++/libmem.hpp>
-
-typedef struct
-{
-	int x, y;
-}iVec2;
-
-typedef struct
-{
-	int x, y, z;
-}iVec3;
-
-typedef struct
-{
-	int x, y, z, w;
-}iVec4;
-
-typedef struct
-{
-	float x, y;
-}flVec2;
-
-typedef struct
-{
-	float x, y, z;
-}flVec3;
-
-typedef struct
-{
-	float x, y, z, w;
-}flVec4;
-
-typedef struct
-{
-	int r, g, b;
-}iColor3;
-
-typedef struct
-{
-	int r, g, b, a;
-}iColor4;
-
-typedef struct
-{
-	float r, g, b;
-}flColor3;
-
-typedef struct
-{
-	float r, g, b, a;
-}flColor4;
+#include <base_types.h>
 
 namespace SDK
 {
@@ -104,8 +55,38 @@ namespace SDK
 
 	struct ViewMatrix
 	{
-		float Matrix[4][4];
+		float matrix[4][4];
 	};
+
+	inline bool WorldToScreen(LPDIRECT3DDEVICE9 pDevice, ViewMatrix vmatrix, D3DXVECTOR3* pos, D3DXVECTOR3* out)
+	{
+		D3DXVECTOR2 screenVec;
+		screenVec.x = pos->x * vmatrix.matrix[0][0] + pos->y * vmatrix.matrix[0][1] + pos->z * vmatrix.matrix[0][2] + vmatrix.matrix[0][3];
+		screenVec.y = pos->x * vmatrix.matrix[1][0] + pos->y * vmatrix.matrix[1][1] + pos->z * vmatrix.matrix[1][2] + vmatrix.matrix[1][3];
+
+		const auto w = pos->x * vmatrix.matrix[3][0] + pos->y * vmatrix.matrix[3][1] + pos->z * vmatrix.matrix[3][2] + vmatrix.matrix[3][3];
+		if (w < 0.1f)
+			return false;
+
+		screenVec.x /= w;
+		screenVec.y /= w;
+
+		D3DVIEWPORT9 viewPort;
+		pDevice->GetViewport(&viewPort);
+
+		out->x = (viewPort.Width / 2) + ((screenVec.x / 2) * viewPort.Width + 0.5f);
+		out->y = (viewPort.Height / 2) - ((screenVec.y / 2) * viewPort.Height + 0.5f);
+		out->z = 0.0f;
+	}
+
+	inline float GetDistance3D(flVec3 pos0, flVec3 pos1)
+	{
+		return sqrt(
+				pow(double(pos1.x) - double(pos0.x), 2.0) +
+				pow(double(pos1.y) - double(pos0.y), 2.0) +
+				pow(double(pos1.z) - double(pos0.z), 2.0)
+			);
+	}
 }
 
 
