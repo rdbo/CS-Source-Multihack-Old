@@ -21,7 +21,7 @@ namespace Draw
 		LineL->Release();
 	}
 
-	inline void Text(LPCSTR str, int x, int y, size_t dist, D3DCOLOR color, LPD3DXFONT pFont, LPDIRECT3DDEVICE9 pDevice)
+	inline void Text(LPCSTR str, int x, int y, size_t dist, D3DCOLOR color, LPD3DXFONT pFont)
 	{
 		RECT rect;
 		pFont->DrawTextA(NULL, str, strlen(str), &rect, DT_CALCRECT, D3DCOLOR_XRGB(0, 0, 0));

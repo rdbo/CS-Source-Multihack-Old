@@ -6,6 +6,7 @@
 #include <cstdint>
 #include <libmem++/libmem.hpp>
 #include <base_types.h>
+#define MAX_ENTITIES 32
 
 namespace SDK
 {
@@ -45,12 +46,9 @@ namespace SDK
 		};
 	};
 
-	class CSEntityList
+	struct CSEntityList
 	{
-		public:
-		CSPlayer Entity;
-		char pad[Offsets::dwDist];
-		CSEntityList* pNext;
+		CSPlayer* Entity;
 	};
 
 	struct ViewMatrix
@@ -77,6 +75,8 @@ namespace SDK
 		out->x = (viewPort.Width / 2) + ((screenVec.x / 2) * viewPort.Width + 0.5f);
 		out->y = (viewPort.Height / 2) - ((screenVec.y / 2) * viewPort.Height + 0.5f);
 		out->z = 0.0f;
+
+		return true;
 	}
 
 	inline float GetDistance3D(flVec3 pos0, flVec3 pos1)

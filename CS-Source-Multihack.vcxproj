@@ -208,6 +208,7 @@
     </ClCompile>
     <ClCompile Include="src\base.cpp" />
     <ClCompile Include="src\hacks\Bunnyhop.cpp" />
+    <ClCompile Include="src\hacks\ESP_Snaplines.cpp" />
     <ClCompile Include="src\hacks\hacks.cpp" />
     <ClCompile Include="src\hooks\EndScene.cpp" />
     <ClCompile Include="src\hooks\hooks.cpp" />
