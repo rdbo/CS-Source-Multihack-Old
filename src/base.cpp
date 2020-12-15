@@ -16,6 +16,7 @@ mem::size_t        Base::Data::szEndScene = 15;
 #endif
 UINT               Base::Data::WmKeys[0xFF];
 bool               Base::Data::Detached   = false;
+bool               Base::Data::ToDetach   = false;
 bool               Base::Data::ShowMenu   = true;
 bool               Base::Data::InitImGui  = false;
 
@@ -33,9 +34,10 @@ UINT               Base::Data::Keys::Bhop = VK_SPACE;
 
 bool               Base::Data::Settings::EnableBunnyhop  = false;
 bool               Base::Data::Settings::EnableSnaplines = false;
-int                Base::Data::Settings::SnaplineThickness = 1;
+int                Base::Data::Settings::SnaplineThickness  = 1;
 flColor4           Base::Data::Settings::SnaplineColorTeam  = { 0, 1, 0.5, 1 };
 flColor4           Base::Data::Settings::SnaplineColorEnemy = { 1, 0.5, 0, 1 }; 
+bool               Base::Data::Settings::EnableRCS = false;
 
 //Functions
 

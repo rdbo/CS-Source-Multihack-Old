@@ -9,6 +9,8 @@ void Base::Hack()
 	if (Data::LocalPlayer)
 	{
 		Hacks::Bunnyhop();
+		Hacks::RCS();
+
 		Data::EntityList = (SDK::CSEntityList*)((mem::uintptr_t)Data::m_client.base + SDK::Offsets::pEntityList);
 		for (size_t i = 0; i < MAX_ENTITIES; i++, Data::EntityList = (SDK::CSEntityList*)((uintptr_t)Data::EntityList + SDK::Offsets::dwDist))
 		{
@@ -22,10 +24,9 @@ void Base::Hack()
 					Data::EntityList->Entity->Position.z
 				);
 
-				Ent2DPos = { (int)out.x, (int)out.y };
-
 				if (SDK::WorldToScreen(Data::pDxDevice9, Data::vMatrix, &pos, &out))
 				{
+					Ent2DPos = { (int)out.x, (int)out.y };
 					Hacks::ESP_Snaplines(Data::EntityList->Entity, Ent2DPos, Data::pDxDevice9, Data::WndWidth, Data::WndHeight);
 				}
 			}

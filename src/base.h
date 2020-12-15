@@ -37,6 +37,7 @@ namespace Base
 		extern mem::size_t        szEndScene;
 		extern UINT               WmKeys[0xFF];
 		extern bool               Detached;
+		extern bool               ToDetach;
 		extern bool               InitImGui;
 		extern bool               ShowMenu;
 
@@ -57,6 +58,7 @@ namespace Base
 			extern int      SnaplineThickness;
 			extern flColor4 SnaplineColorTeam;
 			extern flColor4 SnaplineColorEnemy;
+			extern bool     EnableRCS;
 		}
 
 		namespace Keys
@@ -70,6 +72,7 @@ namespace Base
 	namespace Hacks
 	{
 		void Bunnyhop();
+		void RCS();
 		void ESP_Snaplines(SDK::CSPlayer* ent, iVec2 Ent2DPos, LPDIRECT3DDEVICE9 pDevice, int wndWidth, int wndHeight);
 	}
 

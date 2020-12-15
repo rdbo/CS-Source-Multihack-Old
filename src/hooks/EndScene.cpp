@@ -20,6 +20,13 @@ HRESULT __stdcall Base::Hooks::EndScene(LPDIRECT3DDEVICE9 pDevice)
 
 	if (!Data::InitImGui) return Data::oEndScene(pDevice);
 
+	if (Data::ToDetach)
+	{
+		Data::ToDetach = false;
+		Base::Detach();
+		return Data::oEndScene(pDevice);
+	}
+
 	Base::Hack();
 
 	ImGui_ImplDX9_NewFrame();
@@ -30,18 +37,14 @@ HRESULT __stdcall Base::Hooks::EndScene(LPDIRECT3DDEVICE9 pDevice)
 	{
 		ImGui::Begin("CS-Source Multihack by rdbo");
 		ImGui::Checkbox("Bunnyhop", &Data::Settings::EnableBunnyhop);
+		ImGui::Checkbox("RCS", &Data::Settings::EnableRCS);
 		ImGui::Checkbox("ESP Snaplines", &Data::Settings::EnableSnaplines);
 		ImGui::SliderInt("Snapline Thickness", &Data::Settings::SnaplineThickness, 0, 100);
 		ImGui::ColorEdit4("Snapline Team", reinterpret_cast<float(&)[4]>(Data::Settings::SnaplineColorTeam));
 		ImGui::ColorEdit4("Snapline Enemy", reinterpret_cast<float(&)[4]>(Data::Settings::SnaplineColorEnemy));
-		if (ImGui::Button("Detach") || Data::WmKeys[Data::Keys::DetachDll] == WM_KEYDOWN)
+		if (ImGui::Button("Detach"))
 		{
-			ImGui::End();
-			ImGui::EndFrame();
-			ImGui::Render();
-			ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
-			Base::Detach();
-			return Data::oEndScene(pDevice);
+			Data::ToDetach = true;
 		}
 		ImGui::End();
 	}
