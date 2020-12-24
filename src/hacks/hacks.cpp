@@ -26,7 +26,12 @@ void Base::Hacks::Run()
 		SDK::iVec2 EntPos2D = {};
 		SDK::iVec2 EntHeadPos2D = {};
 		SDK::flVec3 EntHeadPos = Data::Client->EntityList->Current->flPos;
-		EntHeadPos.z += 64.f;
+
+		if(!(Data::Client->EntityList->Current->iFlags & FLAG_CROUCH))
+			EntHeadPos.z += 64.f;
+		else
+			EntHeadPos.z += 47.f;
+
 		if (SDK::WorldToScreen(Data::pDxDevice9, Data::Engine->ViewMatrix, &Data::Client->EntityList->Current->flPos, &EntPos2D))
 		{
 			Hacks::ESP_Snaplines(Data::Client->EntityList->Current, EntPos2D);

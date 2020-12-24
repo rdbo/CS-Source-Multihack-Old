@@ -9,6 +9,9 @@
 #define SDK_OFFSET(offset) (&((char*)this->Module.base)[offset])
 #define SDK_UNION_VAR(type, varname, offset) CREATE_UNION_MEMBER(type, varname, offset)
 
+#define FLAG_ON_GROUND (1 << 0)
+#define FLAG_CROUCH    (1 << 1)
+
 namespace SDK
 {
 	namespace Offsets
