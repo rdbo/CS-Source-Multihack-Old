@@ -43,6 +43,9 @@ HRESULT __stdcall Base::Hooks::EndScene(LPDIRECT3DDEVICE9 pDevice)
 		ImGui::Checkbox("ESP Snaplines", &Data::Settings::EnableEspSnaplines);
 		ImGui::ColorEdit4("Snaplines Team", reinterpret_cast<float(&)[4]>(Data::Settings::SnaplineColorTeam));
 		ImGui::ColorEdit4("Snaplines Enemy", reinterpret_cast<float(&)[4]>(Data::Settings::SnaplineColorEnemy));
+		ImGui::Checkbox("No Flash", &Data::Settings::EnableNoFlash);
+		ImGui::SliderFloat("Flash Duration", &Data::Settings::FlashTime, 0.f, 100.f);
+		ImGui::SliderFloat("Flash Alpha", &Data::Settings::FlashAlpha, 0.f, 255.f);
 		if (ImGui::Button("Detach"))
 			Data::ToDetach = true;
 		ImGui::End();

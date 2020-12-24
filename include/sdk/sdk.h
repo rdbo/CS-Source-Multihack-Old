@@ -33,6 +33,8 @@ namespace SDK
 		const uintptr_t bDormant = 0x17E;
 		const uintptr_t flPos = 0x260;
 		const uintptr_t dwFlags = 0x350;
+		const uintptr_t flFlashMaxAlpha = 0x1450;
+		const uintptr_t flFlashDuration = 0x1454;
 
 
 		//CSEntityList
@@ -103,6 +105,8 @@ namespace SDK
 			SDK_UNION_VAR(bool_t,  bDormant, Offsets::bDormant);
 			SDK_UNION_VAR(flVec3,  flPos,    Offsets::flPos);
 			SDK_UNION_VAR(int32_t, iFlags,   Offsets::dwFlags);
+			SDK_UNION_VAR(float,   flFlashMaxAlpha, Offsets::flFlashMaxAlpha);
+			SDK_UNION_VAR(float,   flFlashDuration, Offsets::flFlashDuration);
 		};
 	};
 

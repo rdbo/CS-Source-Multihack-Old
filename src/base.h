@@ -56,6 +56,9 @@ namespace Base
 			extern SDK::flColor4 SnaplineColorTeam;
 			extern SDK::flColor4 SnaplineColorEnemy;
 			extern int           SnaplineThickness;
+			extern bool  EnableNoFlash;
+			extern float FlashTime;
+			extern float FlashAlpha;
 		}
 
 		namespace Keys
@@ -71,6 +74,7 @@ namespace Base
 		void Run();
 		void Bunnyhop();
 		void ESP_Snaplines(SDK::CSPlayer* ent, SDK::iVec2 EntPos2D);
+		void NoFlash();
 	}
 
 	namespace Hooks

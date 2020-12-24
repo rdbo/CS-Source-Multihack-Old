@@ -213,8 +213,9 @@
     <ClCompile Include="src\base.cpp" />
     <ClCompile Include="src\hacks\Bunnyhop.cpp" />
     <ClCompile Include="src\hacks\hacks.cpp" />
+    <ClCompile Include="src\hacks\NoFlash.cpp" />
     <ClCompile Include="src\hooks\EndScene.cpp" />
-    <ClCompile Include="src\hooks\ESP_Snaplines.cpp" />
+    <ClCompile Include="src\hacks\ESP_Snaplines.cpp" />
     <ClCompile Include="src\hooks\hooks.cpp" />
     <ClCompile Include="src\hooks\WndProc.cpp" />
     <ClCompile Include="src\main.cpp" />

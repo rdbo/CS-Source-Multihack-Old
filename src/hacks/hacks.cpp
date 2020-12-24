@@ -10,6 +10,7 @@ void Base::Hacks::Run()
 	if (!Data::Client->LocalPlayer) return;
 
 	Hacks::Bunnyhop();
+	Hacks::NoFlash();
 
 	for (size_t i = 0; i < MAX_ENTITIES; i++, Data::Client->EntityList = (SDK::CSEntityList*)(&((mem::byte_t*)Data::Client->EntityList)[SDK::Offsets::dwDist]))
 	{
