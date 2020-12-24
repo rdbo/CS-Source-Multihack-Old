@@ -43,9 +43,16 @@ HRESULT __stdcall Base::Hooks::EndScene(LPDIRECT3DDEVICE9 pDevice)
 		ImGui::Checkbox("ESP Snaplines", &Data::Settings::EnableEspSnaplines);
 		ImGui::ColorEdit4("Snaplines Team", reinterpret_cast<float(&)[4]>(Data::Settings::SnaplineColorTeam));
 		ImGui::ColorEdit4("Snaplines Enemy", reinterpret_cast<float(&)[4]>(Data::Settings::SnaplineColorEnemy));
+		ImGui::SliderInt("Snapline Thickness", &Data::Settings::SnaplineThickness, 0, 50);
 		ImGui::Checkbox("No Flash", &Data::Settings::EnableNoFlash);
 		ImGui::SliderFloat("Flash Duration", &Data::Settings::FlashTime, 0.f, 100.f);
 		ImGui::SliderFloat("Flash Alpha", &Data::Settings::FlashAlpha, 0.f, 255.f);
+		ImGui::Checkbox("Enable ESP Box", &Data::Settings::EnableEspBox);
+		ImGui::ColorEdit4("Box Team", reinterpret_cast<float(&)[4]>(Data::Settings::BoxColorTeam));
+		ImGui::ColorEdit4("Box Enemy", reinterpret_cast<float(&)[4]>(Data::Settings::BoxColorEnemy));
+		ImGui::ColorEdit4("Box Fill Team", reinterpret_cast<float(&)[4]>(Data::Settings::BoxFillColorTeam));
+		ImGui::ColorEdit4("Box Fill Enemy", reinterpret_cast<float(&)[4]>(Data::Settings::BoxFillColorEnemy));
+		ImGui::SliderInt("Box Thickness", &Data::Settings::BoxThickness, 0, 50);
 		if (ImGui::Button("Detach"))
 			Data::ToDetach = true;
 		ImGui::End();

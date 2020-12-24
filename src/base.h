@@ -59,6 +59,12 @@ namespace Base
 			extern bool  EnableNoFlash;
 			extern float FlashTime;
 			extern float FlashAlpha;
+			extern bool EnableEspBox;
+			extern SDK::flColor4 BoxColorTeam;
+			extern SDK::flColor4 BoxColorEnemy;
+			extern SDK::flColor4 BoxFillColorTeam;
+			extern SDK::flColor4 BoxFillColorEnemy;
+			extern int           BoxThickness;
 		}
 
 		namespace Keys
@@ -75,6 +81,7 @@ namespace Base
 		void Bunnyhop();
 		void ESP_Snaplines(SDK::CSPlayer* ent, SDK::iVec2 EntPos2D);
 		void NoFlash();
+		void ESP_Box(SDK::CSPlayer* ent, SDK::iVec2 EntPos2D, SDK::iVec2 EntHeadPos2D);
 	}
 
 	namespace Hooks

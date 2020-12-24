@@ -35,6 +35,12 @@ int               Base::Data::Settings::SnaplineThickness   = 2;
 bool              Base::Data::Settings::EnableNoFlash = false;
 float             Base::Data::Settings::FlashTime = 0;
 float             Base::Data::Settings::FlashAlpha = 0;
+bool              Base::Data::Settings::EnableEspBox  = false;
+SDK::flColor4     Base::Data::Settings::BoxColorTeam  = { 0, 0, 1, 1 };
+SDK::flColor4     Base::Data::Settings::BoxColorEnemy = { 1, 0, 0, 1 };
+SDK::flColor4     Base::Data::Settings::BoxFillColorTeam  = { 0, 0, 1, 0.3 };
+SDK::flColor4     Base::Data::Settings::BoxFillColorEnemy = { 1, 0, 0, 0.3 };
+int               Base::Data::Settings::BoxThickness = 2;
 
 UINT              Base::Data::Keys::Bhop = VK_SPACE;
 

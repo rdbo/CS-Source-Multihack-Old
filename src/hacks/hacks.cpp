@@ -24,9 +24,17 @@ void Base::Hacks::Run()
 		)) continue;
 
 		SDK::iVec2 EntPos2D = {};
+		SDK::iVec2 EntHeadPos2D = {};
+		SDK::flVec3 EntHeadPos = Data::Client->EntityList->Current->flPos;
+		EntHeadPos.z += 64.f;
 		if (SDK::WorldToScreen(Data::pDxDevice9, Data::Engine->ViewMatrix, &Data::Client->EntityList->Current->flPos, &EntPos2D))
 		{
 			Hacks::ESP_Snaplines(Data::Client->EntityList->Current, EntPos2D);
+
+			if (SDK::WorldToScreen(Data::pDxDevice9, Data::Engine->ViewMatrix, &EntHeadPos, &EntHeadPos2D))
+			{
+				Hacks::ESP_Box(Data::Client->EntityList->Current, EntPos2D, EntHeadPos2D);
+			}
 		}
 	}
 }
