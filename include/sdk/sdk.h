@@ -69,6 +69,26 @@ namespace SDK
 		float x, y, z, w;
 	};
 
+	struct iColor3
+	{
+		int r, g, b;
+	};
+
+	struct iColor4
+	{
+		int r, g, b, a;
+	};
+
+	struct flColor3
+	{
+		float r, g, b;
+	};
+
+	struct flColor4
+	{
+		float r, g, b, a;
+	};
+
 	typedef bool bool_t;
 	typedef char byte_t;
 
@@ -88,9 +108,7 @@ namespace SDK
 
 	struct CSEntityList
 	{
-		CSPlayer* CurrentPlayer;
-		char      Distance[Offsets::dwDist];
-		CSEntityList* Next;
+		CSPlayer* Current;
 	};
 
 	struct ViewMatrix_t
@@ -186,6 +204,28 @@ namespace SDK
 			this->ShowCursor = (bool_t*)SDK_OFFSET(Offsets::bShowCursor);
 		}
 	};
+
+	inline bool WorldToScreen(LPDIRECT3DDEVICE9 pDevice, ViewMatrix_t* vmatrix, flVec3* pos, iVec2* out)
+	{
+		D3DXVECTOR2 screenVec;
+		screenVec.x = pos->x * vmatrix->Matrix[0][0] + pos->y * vmatrix->Matrix[0][1] + pos->z * vmatrix->Matrix[0][2] + vmatrix->Matrix[0][3];
+		screenVec.y = pos->x * vmatrix->Matrix[1][0] + pos->y * vmatrix->Matrix[1][1] + pos->z * vmatrix->Matrix[1][2] + vmatrix->Matrix[1][3];
+
+		const auto w = pos->x * vmatrix->Matrix[3][0] + pos->y * vmatrix->Matrix[3][1] + pos->z * vmatrix->Matrix[3][2] + vmatrix->Matrix[3][3];
+		if (w < 0.1f)
+			return false;
+
+		screenVec.x /= w;
+		screenVec.y /= w;
+
+		D3DVIEWPORT9 viewPort;
+		pDevice->GetViewport(&viewPort);
+
+		out->x = (int)((viewPort.Width / 2) + ((screenVec.x / 2) * viewPort.Width + 0.5f));
+		out->y = (int)((viewPort.Height / 2) - ((screenVec.y / 2) * viewPort.Height + 0.5f));
+
+		return true;
+	}
 }
 
 #endif

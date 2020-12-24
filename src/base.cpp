@@ -20,11 +20,18 @@ bool              Base::Data::ToDetach   = false;
 bool              Base::Data::ShowMenu   = true;
 bool              Base::Data::InitImGui  = false;
 
+int  Base::Data::WndWidth = 0;
+int  Base::Data::WndHeight = 0;
+RECT Base::Data::WndRect = {};
 SDK::CSClient* Base::Data::Client = (SDK::CSClient*)NULL;
 SDK::CSEngine* Base::Data::Engine = (SDK::CSEngine*)NULL;
 SDK::CSVGUIMatSurface* Base::Data::VGuiMatSurface = (SDK::CSVGUIMatSurface*)NULL;
 
 bool              Base::Data::Settings::EnableBunnyhop = false;
+bool              Base::Data::Settings::EnableEspSnaplines  = false;
+SDK::flColor4     Base::Data::Settings::SnaplineColorTeam   = { 0, 1, 0.5, 1 };
+SDK::flColor4     Base::Data::Settings::SnaplineColorEnemy  = { 1, 0.5, 0, 1 };
+int               Base::Data::Settings::SnaplineThickness   = 2;
 
 UINT              Base::Data::Keys::Bhop = VK_SPACE;
 

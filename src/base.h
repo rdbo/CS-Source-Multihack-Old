@@ -11,6 +11,8 @@
 #define D3DDEV9_LEN 119
 
 #include "pch.h"
+#define MAX_ENTITIES 64
+#define STATE_IS_ALIVE 2
 
 typedef HRESULT(__stdcall* EndScene_t)(LPDIRECT3DDEVICE9);
 typedef LRESULT(CALLBACK*  WndProc_t) (HWND, UINT, WPARAM, LPARAM);
@@ -40,6 +42,9 @@ namespace Base
 		extern bool              InitImGui;
 		extern bool              ShowMenu;
 
+		extern int  WndWidth;
+		extern int  WndHeight;
+		extern RECT WndRect;
 		extern SDK::CSClient*         Client;
 		extern SDK::CSEngine*         Engine;
 		extern SDK::CSVGUIMatSurface* VGuiMatSurface;
@@ -47,6 +52,10 @@ namespace Base
 		namespace Settings
 		{
 			extern bool EnableBunnyhop;
+			extern bool EnableEspSnaplines;
+			extern SDK::flColor4 SnaplineColorTeam;
+			extern SDK::flColor4 SnaplineColorEnemy;
+			extern int           SnaplineThickness;
 		}
 
 		namespace Keys
@@ -61,6 +70,7 @@ namespace Base
 	{
 		void Run();
 		void Bunnyhop();
+		void ESP_Snaplines(SDK::CSPlayer* ent, SDK::iVec2 EntPos2D);
 	}
 
 	namespace Hooks
