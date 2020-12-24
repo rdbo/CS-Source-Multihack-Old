@@ -24,6 +24,10 @@ SDK::CSClient* Base::Data::Client = (SDK::CSClient*)NULL;
 SDK::CSEngine* Base::Data::Engine = (SDK::CSEngine*)NULL;
 SDK::CSVGUIMatSurface* Base::Data::VGuiMatSurface = (SDK::CSVGUIMatSurface*)NULL;
 
+bool              Base::Data::Settings::EnableBunnyhop = false;
+
+UINT              Base::Data::Keys::Bhop = VK_SPACE;
+
 
 //Functions
 

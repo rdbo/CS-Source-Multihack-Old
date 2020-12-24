@@ -14,9 +14,10 @@ namespace SDK
 	namespace Offsets
 	{
 		//client.dll
-		const uintptr_t dwForceJump = 0x4F3B3C;
+		const uintptr_t dwForceJump  = 0x4F3B3C;
 		const uintptr_t pLocalPlayer = 0x4C6708;
-		const uintptr_t pEntityList = 0x4D3904;
+		const uintptr_t pEntityList  = 0x4D3904;
+		const uintptr_t fnGameInput  = 0x1489C7;
 
 		//engine.dll
 		const uintptr_t bHookCursor = 0x3C00C4;
@@ -108,6 +109,11 @@ namespace SDK
 			this->Module = mem::in::get_module(module_name);
 			return this->Module.is_valid();
 		}
+
+		void Update()
+		{
+
+		}
 	};
 
 	class CSClient : public GameModule
@@ -123,19 +129,24 @@ namespace SDK
 			if (!this->Setup("client.dll"))
 				return;
 
-			this->ForceJump   = (uint32_t*)SDK_OFFSET(Offsets::dwForceJump);
-			this->LocalPlayer = (CSPlayer*)SDK_OFFSET(Offsets::pLocalPlayer);
-			this->EntityList  = (CSEntityList*)SDK_OFFSET(Offsets::pEntityList);
+			this->Update();
 
 			this->IsValid = true;
+		}
+
+		void Update()
+		{
+			this->ForceJump = (uint32_t*)SDK_OFFSET(Offsets::dwForceJump);
+			this->LocalPlayer = *(CSPlayer**)SDK_OFFSET(Offsets::pLocalPlayer);
+			this->EntityList = (CSEntityList*)SDK_OFFSET(Offsets::pEntityList);
 		}
 	};
 
 	class CSEngine : public GameModule
 	{
 	public:
-		bool_t* HookCursor;
-		ViewMatrix_t* ViewMatrix;
+		bool_t* HookCursor = (bool_t*)NULL;
+		ViewMatrix_t* ViewMatrix = (ViewMatrix_t*)NULL;
 
 	public:
 		CSEngine()
@@ -143,24 +154,36 @@ namespace SDK
 			if (!this->Setup("engine.dll"))
 				return;
 
+			this->Update();
+
+			this->IsValid = true;
+		}
+
+		void Update()
+		{
 			this->HookCursor = (bool_t*)SDK_OFFSET(Offsets::bHookCursor);
 			this->ViewMatrix = (ViewMatrix_t*)SDK_OFFSET(Offsets::flViewMatrix);
-			this->IsValid = true;
 		}
 	};
 
 	class CSVGUIMatSurface : public GameModule
 	{
 	public:
-		bool_t* ShowCursor;
+		bool_t* ShowCursor = (bool_t*)NULL;
 	public:
 		CSVGUIMatSurface()
 		{
 			if (!this->Setup("vguimatsurface.dll"))
 				return;
 
-			this->ShowCursor = (bool_t*)SDK_OFFSET(Offsets::bShowCursor);
+			this->Update();
+
 			this->IsValid = true;
+		}
+
+		void Update()
+		{
+			this->ShowCursor = (bool_t*)SDK_OFFSET(Offsets::bShowCursor);
 		}
 	};
 }

@@ -44,11 +44,23 @@ namespace Base
 		extern SDK::CSEngine*         Engine;
 		extern SDK::CSVGUIMatSurface* VGuiMatSurface;
 
+		namespace Settings
+		{
+			extern bool EnableBunnyhop;
+		}
+
 		namespace Keys
 		{
-			const UINT ToggleMenu = VK_INSERT;
-			const UINT DetachDll  = VK_END;
+			const  UINT ToggleMenu = VK_INSERT;
+			const  UINT DetachDll  = VK_END;
+			extern UINT Bhop;
 		}
+	}
+
+	namespace Hacks
+	{
+		void Run();
+		void Bunnyhop();
 	}
 
 	namespace Hooks

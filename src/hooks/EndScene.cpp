@@ -21,6 +21,8 @@ HRESULT __stdcall Base::Hooks::EndScene(LPDIRECT3DDEVICE9 pDevice)
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
+	Hacks::Run();
+
 	if (Data::ShowMenu)
 	{
 		if (!*Data::VGuiMatSurface->ShowCursor)
@@ -32,8 +34,8 @@ HRESULT __stdcall Base::Hooks::EndScene(LPDIRECT3DDEVICE9 pDevice)
 		if (*Data::Engine->HookCursor)
 			*Data::Engine->HookCursor = false;
 
-		ImGui::Begin("ImGui Window");
-		ImGui::Text("Test ImGUI Window");
+		ImGui::Begin("Counter-Strike: Source Multihack by rdbo");
+		ImGui::Checkbox("Bunnyhop", &Data::Settings::EnableBunnyhop);
 		if (ImGui::Button("Detach"))
 			Data::ToDetach = true;
 		ImGui::End();
