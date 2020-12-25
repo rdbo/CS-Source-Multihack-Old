@@ -42,6 +42,9 @@ namespace Base
 		extern bool              InitImGui;
 		extern bool              ShowMenu;
 		extern bool              ShowWatermark;
+		extern bool              ShowEspSnaplinesSettings;
+		extern bool              ShowEspBoxSettings;
+		extern bool              ShowNoFlashSettings;
 		extern ImFont*           UbuntuRegularSmall;
 		extern ImFont*           UbuntuRegularMedium;
 		extern ImFont*           UbuntuRegularLarge;
