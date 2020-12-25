@@ -11,5 +11,6 @@
 #include <imgui/imgui_impl_win32.h>
 #include <imgui/imgui_impl_dx9.h>
 #include <sdk/sdk.h>
+#include <fonts/Ubuntu_Regular.h>
 
 #endif

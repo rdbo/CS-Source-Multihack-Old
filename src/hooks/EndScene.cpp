@@ -16,6 +16,13 @@ HRESULT __stdcall Base::Hooks::EndScene(LPDIRECT3DDEVICE9 pDevice)
 		ImGui_ImplWin32_Init(Data::hWindow);
 		ImGui_ImplDX9_Init(pDevice);
 		Data::InitImGui = true;
+
+		ImFontConfig font_cfg = {};
+		font_cfg.FontDataOwnedByAtlas = false;
+		Data::UbuntuRegularSmall  = io.Fonts->AddFontFromMemoryTTF((void*)Ubuntu_Regular_ttf, sizeof(Ubuntu_Regular_ttf), 14, &font_cfg);
+		Data::UbuntuRegularMedium = io.Fonts->AddFontFromMemoryTTF((void*)Ubuntu_Regular_ttf, sizeof(Ubuntu_Regular_ttf), 18, &font_cfg);
+		Data::UbuntuRegularLarge  = io.Fonts->AddFontFromMemoryTTF((void*)Ubuntu_Regular_ttf, sizeof(Ubuntu_Regular_ttf), 24, &font_cfg);
+		Data::ActiveFont          = Data::UbuntuRegularSmall;
 	}
 
 	if (!Data::InitImGui) return Data::oEndScene(pDevice);
@@ -25,7 +32,13 @@ HRESULT __stdcall Base::Hooks::EndScene(LPDIRECT3DDEVICE9 pDevice)
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
+	ImGui::PushFont(Data::ActiveFont);
+
 	Hacks::Run();
+
+	ImDrawList* DrawBg = ImGui::GetBackgroundDrawList();
+	if (Data::ShowWatermark)
+		DrawBg->AddText({20, 2}, ImColor(1.f, 1.f, 1.f, 1.f), "Counter-Strike: Source Multihack by rdbo");
 
 	if (Data::ShowMenu)
 	{
@@ -39,6 +52,23 @@ HRESULT __stdcall Base::Hooks::EndScene(LPDIRECT3DDEVICE9 pDevice)
 			*Data::Engine->HookCursor = false;
 
 		ImGui::Begin("Counter-Strike: Source Multihack by rdbo");
+		ImGui::Checkbox("Watermark", &Data::ShowWatermark);
+		if (ImGui::ListBox("Font Size", &Data::ActiveFontId, Data::FontList, 3))
+		{
+			switch (Data::ActiveFontId)
+			{
+			case 0:
+				Data::ActiveFont = Data::UbuntuRegularSmall;
+				break;
+			case 1:
+				Data::ActiveFont = Data::UbuntuRegularMedium;
+				break;
+			case 2:
+				Data::ActiveFont = Data::UbuntuRegularLarge;
+				break;
+			}
+		}
+
 		ImGui::Checkbox("Bunnyhop", &Data::Settings::EnableBunnyhop);
 		ImGui::Checkbox("ESP Snaplines", &Data::Settings::EnableEspSnaplines);
 		ImGui::ColorEdit4("Snaplines Team", reinterpret_cast<float(&)[4]>(Data::Settings::SnaplineColorTeam));
@@ -58,6 +88,7 @@ HRESULT __stdcall Base::Hooks::EndScene(LPDIRECT3DDEVICE9 pDevice)
 		ImGui::End();
 	}
 
+	ImGui::PopFont();
 	ImGui::EndFrame();
 	ImGui::Render();
 	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());

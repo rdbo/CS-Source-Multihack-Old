@@ -41,6 +41,13 @@ namespace Base
 		extern bool              ToDetach;
 		extern bool              InitImGui;
 		extern bool              ShowMenu;
+		extern bool              ShowWatermark;
+		extern ImFont*           UbuntuRegularSmall;
+		extern ImFont*           UbuntuRegularMedium;
+		extern ImFont*           UbuntuRegularLarge;
+		extern ImFont*           ActiveFont;
+		extern int               ActiveFontId;
+		const  char* const       FontList[] = { "Small", "Medium", "Large" };
 
 		extern int  WndWidth;
 		extern int  WndHeight;

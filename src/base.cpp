@@ -17,8 +17,14 @@ mem::size_t       Base::Data::szEndScene = 15;
 UINT              Base::Data::WmKeys[0xFF];
 bool              Base::Data::Detached   = false;
 bool              Base::Data::ToDetach   = false;
-bool              Base::Data::ShowMenu   = true;
 bool              Base::Data::InitImGui  = false;
+bool              Base::Data::ShowMenu   = true;
+bool              Base::Data::ShowWatermark = true;
+ImFont*           Base::Data::UbuntuRegularSmall  = (ImFont*)NULL;
+ImFont*           Base::Data::UbuntuRegularMedium = (ImFont*)NULL;
+ImFont*           Base::Data::UbuntuRegularLarge  = (ImFont*)NULL;
+ImFont*           Base::Data::ActiveFont          = (ImFont*)NULL;
+int               Base::Data::ActiveFontId        = 0;
 
 int  Base::Data::WndWidth = 0;
 int  Base::Data::WndHeight = 0;
